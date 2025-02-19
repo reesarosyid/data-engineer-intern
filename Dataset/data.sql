@@ -1,3 +1,8 @@
+-- Buat database Sample
+CREATE DATABASE Sample;
+
+-- Gunakan database DWH
+\c Sample;
 --
 -- PostgreSQL database dump
 --
