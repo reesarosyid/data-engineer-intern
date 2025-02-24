@@ -1,0 +1,235 @@
+[2025-02-21T10:20:12.204+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-02-21T10:20:12.221+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_to_DWH.load manual__2025-02-21T10:15:06.546830+00:00 [queued]>
+[2025-02-21T10:20:12.224+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_to_DWH.load manual__2025-02-21T10:15:06.546830+00:00 [queued]>
+[2025-02-21T10:20:12.225+0000] {taskinstance.py:2867} INFO - Starting attempt 2 of 2
+[2025-02-21T10:20:12.229+0000] {taskinstance.py:2890} INFO - Executing <Task(PythonOperator): load> on 2025-02-21 10:15:06.546830+00:00
+[2025-02-21T10:20:12.236+0000] {logging_mixin.py:190} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=443) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-02-21T10:20:12.238+0000] {standard_task_runner.py:72} INFO - Started process 444 to run task
+[2025-02-21T10:20:12.238+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_to_DWH', 'load', 'manual__2025-02-21T10:15:06.546830+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/etl.py', '--cfg-path', '/tmp/tmpekgsr_pp']
+[2025-02-21T10:20:12.242+0000] {standard_task_runner.py:105} INFO - Job 8: Subtask load
+[2025-02-21T10:20:12.304+0000] {logging_mixin.py:190} WARNING - /home/***/.local/lib/python3.12/site-packages/***/settings.py:209 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2025-02-21T10:20:12.326+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_to_DWH.load manual__2025-02-21T10:15:06.546830+00:00 [running]> on host 327d2c65685a
+[2025-02-21T10:20:12.370+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_to_DWH' AIRFLOW_CTX_TASK_ID='load' AIRFLOW_CTX_EXECUTION_DATE='2025-02-21T10:15:06.546830+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-21T10:15:06.546830+00:00'
+[2025-02-21T10:20:12.371+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-02-21T10:20:12.430+0000] {taskinstance.py:3313} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+                                     ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "dimcustomer_pkey"
+DETAIL:  Key (customerid)=(1) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/etl.py", line 90, in load
+    DimCustomer.to_sql("dimcustomer", engine, index=False, if_exists='append')
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/util/_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/generic.py", line 3008, in to_sql
+    return sql.to_sql(
+           ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 788, in to_sql
+    return pandas_sql.to_sql(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1958, in to_sql
+    total_inserted = sql_engine.insert_records(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1507, in insert_records
+    raise err
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1498, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1059, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 951, in _execute_insert
+    result = conn.execute(self.table.insert(), data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+                                     ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "dimcustomer_pkey"
+DETAIL:  Key (customerid)=(1) already exists.
+
+[SQL: INSERT INTO dimcustomer (customerid, customername, address, cityname, age, gender, email) VALUES (%(customerid)s, %(customername)s, %(address)s, %(cityname)s, %(age)s, %(gender)s, %(email)s)]
+[parameters: ({'customerid': 1, 'customername': 'SHELLY JUWITA', 'address': 'JL. BOULEVARD NO. 31', 'cityname': 'KELAPA GADING', 'age': 25, 'gender': 'FEMALE', 'email': 'shelly@gmail.com'}, {'customerid': 2, 'customername': 'BOBI RINALDO', 'address': 'JL. MANGGA NO. 1', 'cityname': 'TANJUNG PRIOK', 'age': 31, 'gender': 'MALE', 'email': 'bobi@gmail.com'}, {'customerid': 3, 'customername': 'ADAM MALIK', 'address': 'JL. KINCIR ANGIN NO. 50', 'cityname': 'PADEMANGAN', 'age': 23, 'gender': 'MALE', 'email': 'adam@gmail.com'}, {'customerid': 4, 'customername': 'SUSI RAHMAWATI', 'address': 'JL. KENANGA NO. 11', 'cityname': 'CILANDAK', 'age': 45, 'gender': 'FEMALE', 'email': 'susi@gmail.com'}, {'customerid': 5, 'customername': 'DIMAS PRASETYO', 'address': 'JL. NIAGARA NO. 69', 'cityname': 'JAGAKARSA', 'age': 32, 'gender': 'MALE', 'email': 'dimas@gmail.com'}, {'customerid': 6, 'customername': 'AJI PANGESTU', 'address': 'JL. SEMPURNA NO. 2', 'cityname': 'MAMPANG PRAPATAN', 'age': 40, 'gender': 'MALE', 'email': 'aji@gmail.com'}, {'customerid': 7, 'customername': 'BUNGA MALIKA', 'address': 'JL. MERAK NO. 10', 'cityname': 'CIBINONG', 'age': 27, 'gender': 'FEMALE', 'email': 'bunga@gmail.com'}, {'customerid': 8, 'customername': 'RIA ADDINI', 'address': 'JL. ARJUNA NO. 40', 'cityname': 'MENTENG', 'age': 29, 'gender': 'FEMALE', 'email': 'ria@gmail.com'}  ... displaying 10 of 20 total bound parameter sets ...  {'customerid': 19, 'customername': 'MALIKA CANTIKA', 'address': 'JL. IMAM BONJOL NO. 30', 'cityname': 'BALARAJA', 'age': 38, 'gender': 'FEMALE', 'email': 'malika@gmail.com'}, {'customerid': 20, 'customername': 'RATNA SARIASIH', 'address': 'JL. JAMBORE NO. 41', 'cityname': 'SUKATANI', 'age': 53, 'gender': 'FEMALE', 'email': 'ratna@gmail.com'})]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)
+[2025-02-21T10:20:12.442+0000] {taskinstance.py:1226} INFO - Marking task as FAILED. dag_id=etl_to_DWH, task_id=load, run_id=manual__2025-02-21T10:15:06.546830+00:00, execution_date=20250221T101506, start_date=20250221T102012, end_date=20250221T102012
+[2025-02-21T10:20:12.455+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-02-21T10:20:12.455+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 8 for task load ((psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "dimcustomer_pkey"
+DETAIL:  Key (customerid)=(1) already exists.
+
+[SQL: INSERT INTO dimcustomer (customerid, customername, address, cityname, age, gender, email) VALUES (%(customerid)s, %(customername)s, %(address)s, %(cityname)s, %(age)s, %(gender)s, %(email)s)]
+[parameters: ({'customerid': 1, 'customername': 'SHELLY JUWITA', 'address': 'JL. BOULEVARD NO. 31', 'cityname': 'KELAPA GADING', 'age': 25, 'gender': 'FEMALE', 'email': 'shelly@gmail.com'}, {'customerid': 2, 'customername': 'BOBI RINALDO', 'address': 'JL. MANGGA NO. 1', 'cityname': 'TANJUNG PRIOK', 'age': 31, 'gender': 'MALE', 'email': 'bobi@gmail.com'}, {'customerid': 3, 'customername': 'ADAM MALIK', 'address': 'JL. KINCIR ANGIN NO. 50', 'cityname': 'PADEMANGAN', 'age': 23, 'gender': 'MALE', 'email': 'adam@gmail.com'}, {'customerid': 4, 'customername': 'SUSI RAHMAWATI', 'address': 'JL. KENANGA NO. 11', 'cityname': 'CILANDAK', 'age': 45, 'gender': 'FEMALE', 'email': 'susi@gmail.com'}, {'customerid': 5, 'customername': 'DIMAS PRASETYO', 'address': 'JL. NIAGARA NO. 69', 'cityname': 'JAGAKARSA', 'age': 32, 'gender': 'MALE', 'email': 'dimas@gmail.com'}, {'customerid': 6, 'customername': 'AJI PANGESTU', 'address': 'JL. SEMPURNA NO. 2', 'cityname': 'MAMPANG PRAPATAN', 'age': 40, 'gender': 'MALE', 'email': 'aji@gmail.com'}, {'customerid': 7, 'customername': 'BUNGA MALIKA', 'address': 'JL. MERAK NO. 10', 'cityname': 'CIBINONG', 'age': 27, 'gender': 'FEMALE', 'email': 'bunga@gmail.com'}, {'customerid': 8, 'customername': 'RIA ADDINI', 'address': 'JL. ARJUNA NO. 40', 'cityname': 'MENTENG', 'age': 29, 'gender': 'FEMALE', 'email': 'ria@gmail.com'}  ... displaying 10 of 20 total bound parameter sets ...  {'customerid': 19, 'customername': 'MALIKA CANTIKA', 'address': 'JL. IMAM BONJOL NO. 30', 'cityname': 'BALARAJA', 'age': 38, 'gender': 'FEMALE', 'email': 'malika@gmail.com'}, {'customerid': 20, 'customername': 'RATNA SARIASIH', 'address': 'JL. JAMBORE NO. 41', 'cityname': 'SUKATANI', 'age': 53, 'gender': 'FEMALE', 'email': 'ratna@gmail.com'})]
+(Background on this error at: https://sqlalche.me/e/14/gkpj); 444)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+                                     ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "dimcustomer_pkey"
+DETAIL:  Key (customerid)=(1) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3006, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 274, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3161, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3185, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/etl.py", line 90, in load
+    DimCustomer.to_sql("dimcustomer", engine, index=False, if_exists='append')
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/util/_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/generic.py", line 3008, in to_sql
+    return sql.to_sql(
+           ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 788, in to_sql
+    return pandas_sql.to_sql(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1958, in to_sql
+    total_inserted = sql_engine.insert_records(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1507, in insert_records
+    raise err
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1498, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1059, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 951, in _execute_insert
+    result = conn.execute(self.table.insert(), data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+                                     ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "dimcustomer_pkey"
+DETAIL:  Key (customerid)=(1) already exists.
+
+[SQL: INSERT INTO dimcustomer (customerid, customername, address, cityname, age, gender, email) VALUES (%(customerid)s, %(customername)s, %(address)s, %(cityname)s, %(age)s, %(gender)s, %(email)s)]
+[parameters: ({'customerid': 1, 'customername': 'SHELLY JUWITA', 'address': 'JL. BOULEVARD NO. 31', 'cityname': 'KELAPA GADING', 'age': 25, 'gender': 'FEMALE', 'email': 'shelly@gmail.com'}, {'customerid': 2, 'customername': 'BOBI RINALDO', 'address': 'JL. MANGGA NO. 1', 'cityname': 'TANJUNG PRIOK', 'age': 31, 'gender': 'MALE', 'email': 'bobi@gmail.com'}, {'customerid': 3, 'customername': 'ADAM MALIK', 'address': 'JL. KINCIR ANGIN NO. 50', 'cityname': 'PADEMANGAN', 'age': 23, 'gender': 'MALE', 'email': 'adam@gmail.com'}, {'customerid': 4, 'customername': 'SUSI RAHMAWATI', 'address': 'JL. KENANGA NO. 11', 'cityname': 'CILANDAK', 'age': 45, 'gender': 'FEMALE', 'email': 'susi@gmail.com'}, {'customerid': 5, 'customername': 'DIMAS PRASETYO', 'address': 'JL. NIAGARA NO. 69', 'cityname': 'JAGAKARSA', 'age': 32, 'gender': 'MALE', 'email': 'dimas@gmail.com'}, {'customerid': 6, 'customername': 'AJI PANGESTU', 'address': 'JL. SEMPURNA NO. 2', 'cityname': 'MAMPANG PRAPATAN', 'age': 40, 'gender': 'MALE', 'email': 'aji@gmail.com'}, {'customerid': 7, 'customername': 'BUNGA MALIKA', 'address': 'JL. MERAK NO. 10', 'cityname': 'CIBINONG', 'age': 27, 'gender': 'FEMALE', 'email': 'bunga@gmail.com'}, {'customerid': 8, 'customername': 'RIA ADDINI', 'address': 'JL. ARJUNA NO. 40', 'cityname': 'MENTENG', 'age': 29, 'gender': 'FEMALE', 'email': 'ria@gmail.com'}  ... displaying 10 of 20 total bound parameter sets ...  {'customerid': 19, 'customername': 'MALIKA CANTIKA', 'address': 'JL. IMAM BONJOL NO. 30', 'cityname': 'BALARAJA', 'age': 38, 'gender': 'FEMALE', 'email': 'malika@gmail.com'}, {'customerid': 20, 'customername': 'RATNA SARIASIH', 'address': 'JL. JAMBORE NO. 41', 'cityname': 'SUKATANI', 'age': 53, 'gender': 'FEMALE', 'email': 'ratna@gmail.com'})]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)
+[2025-02-21T10:20:12.471+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2025-02-21T10:20:12.482+0000] {taskinstance.py:3901} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-02-21T10:20:12.482+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

@@ -1,0 +1,98 @@
+[2025-02-21T10:15:09.834+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-02-21T10:15:09.883+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_to_DWH.transform manual__2025-02-21T10:15:06.546830+00:00 [queued]>
+[2025-02-21T10:15:09.900+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_to_DWH.transform manual__2025-02-21T10:15:06.546830+00:00 [queued]>
+[2025-02-21T10:15:09.900+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 2
+[2025-02-21T10:15:09.926+0000] {taskinstance.py:2890} INFO - Executing <Task(PythonOperator): transform> on 2025-02-21 10:15:06.546830+00:00
+[2025-02-21T10:15:09.973+0000] {logging_mixin.py:190} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=297) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-02-21T10:15:09.978+0000] {standard_task_runner.py:72} INFO - Started process 300 to run task
+[2025-02-21T10:15:09.981+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_to_DWH', 'transform', 'manual__2025-02-21T10:15:06.546830+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/etl.py', '--cfg-path', '/tmp/tmpyky9xme0']
+[2025-02-21T10:15:09.984+0000] {standard_task_runner.py:105} INFO - Job 4: Subtask transform
+[2025-02-21T10:15:10.011+0000] {logging_mixin.py:190} WARNING - /home/***/.local/lib/python3.12/site-packages/***/settings.py:209 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2025-02-21T10:15:10.071+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_to_DWH.transform manual__2025-02-21T10:15:06.546830+00:00 [running]> on host 327d2c65685a
+[2025-02-21T10:15:10.152+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_to_DWH' AIRFLOW_CTX_TASK_ID='transform' AIRFLOW_CTX_EXECUTION_DATE='2025-02-21T10:15:06.546830+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-21T10:15:06.546830+00:00'
+[2025-02-21T10:15:10.153+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-02-21T10:15:10.242+0000] {python.py:240} INFO - Done. Returned value was: (    customerid     customername  ...  gender             email
+0            1    SHELLY JUWITA  ...  FEMALE  shelly@gmail.com
+1            2     BOBI RINALDO  ...    MALE    bobi@gmail.com
+2            3       ADAM MALIK  ...    MALE    adam@gmail.com
+3            4   SUSI RAHMAWATI  ...  FEMALE    susi@gmail.com
+4            5   DIMAS PRASETYO  ...    MALE   dimas@gmail.com
+5            6     AJI PANGESTU  ...    MALE     aji@gmail.com
+6            7     BUNGA MALIKA  ...  FEMALE   bunga@gmail.com
+7            8       RIA ADDINI  ...  FEMALE     ria@gmail.com
+8            9   LISA WULANDARI  ...  FEMALE    lisa@gmail.com
+9           10       RIO WIJAYA  ...    MALE     rio@gmail.com
+10          11   AHMAD RIYANSAH  ...    MALE   ahmad@gmail.com
+11          12     MARIO ROBERT  ...    MALE   mario@gmail.com
+12          13     KHANSA AUDYA  ...  FEMALE  khansa@gmail.com
+13          14  CINTYA GABRIELA  ...  FEMALE  cintya@gmail.com
+14          15      ANI NURAINI  ...  FEMALE     ani@gmail.com
+15          16    AGUNG MULYONO  ...    MALE   agung@gmail.com
+16          17      RIAN WIBOWO  ...    MALE    rian@gmail.com
+17          18      LUTFI AULIA  ...    MALE   lutfi@gmail.com
+18          19   MALIKA CANTIKA  ...  FEMALE  malika@gmail.com
+19          20   RATNA SARIASIH  ...  FEMALE   ratna@gmail.com
+
+[20 rows x 7 columns],    branchid    branchname           branchlocation
+0         1    KC Jakarta  Jl. Gatot Subroto No 13
+1         2      KC Bogor     Jl. Padjajaran No 43
+2         3      KC Depok  Jl. Raya Sawangan No 34
+3         4  KC Tangerang         Jl. Cisauk No 50
+4         5     KC Bekasi     Jl. Ahmad Yani No 23,     accountid  customerid  ...           dateopened      status
+0           1           1  ...  2020-05-01 09:00:00      active
+1           2           2  ...  2020-06-01 10:00:00      active
+2           3           1  ...  2020-06-21 09:00:00      active
+3           4           3  ...  2021-06-24 11:00:00  terminated
+4           5           4  ...  2020-06-29 13:00:00      active
+5           6           5  ...  2020-07-01 09:00:00      active
+6           7           6  ...  2020-07-14 09:00:00  terminated
+7           8           7  ...  2020-07-15 09:00:00      active
+8           9           8  ...  2020-07-15 11:00:00      active
+9          10           9  ...  2020-07-16 10:00:00      active
+10         11          10  ...  2020-07-24 11:00:00      active
+11         12          11  ...  2020-08-08 10:00:00      active
+12         13          12  ...  2020-08-15 11:00:00      active
+13         14          13  ...  2020-08-15 14:00:00      active
+14         15          14  ...  2020-09-25 08:00:00  terminated
+15         16          15  ...  2020-09-26 09:00:00      active
+16         17          15  ...  2020-10-19 09:00:00      active
+17         18          17  ...  2020-10-21 10:00:00      active
+18         19          18  ...  2020-11-11 09:00:00      active
+19         20          19  ...  2020-11-19 08:00:00      active
+20         21          20  ...  2020-11-29 08:00:00      active
+21         22           3  ...  2022-08-18 10:00:00      active
+22         23           6  ...  2022-01-10 12:00:00      active
+
+[23 rows x 6 columns],     transactionid  accountid  ...    amount transactiontype
+0               1          1  ...    100000         Deposit
+1               2          2  ...   1000000         Deposit
+2               3          3  ...  10000000        Transfer
+3               4          3  ...   1000000      Withdrawal
+4               5          5  ...    200000         Deposit
+5               6          6  ...     50000      Withdrawal
+6               7          6  ...    100000         Payment
+7               8          7  ...   5000000         Deposit
+8               9          8  ...    300000      Withdrawal
+9              10          9  ...   2000000         Deposit
+12             11         10  ...   1000000        Transfer
+13             12         11  ...    500000         Deposit
+14             13         12  ...    500000      Withdrawal
+15             14         13  ...   1500000         Deposit
+16             15         14  ...    500000        Transfer
+19             16         15  ...    100000         Deposit
+20             17         16  ...    100000      Withdrawal
+21             18         17  ...    700000         Deposit
+22             19         18  ...     30000         Payment
+23             20         19  ...   2500000         Deposit
+24             21         20  ...    150000         Payment
+25             22         21  ...    800000      Withdrawal
+26             23         22  ...    100000      Withdrawal
+27             24         23  ...    300000         Payment
+28             25         23  ...    400000         Deposit
+
+[25 rows x 6 columns])
+[2025-02-21T10:15:10.282+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-02-21T10:15:10.283+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=etl_to_DWH, task_id=transform, run_id=manual__2025-02-21T10:15:06.546830+00:00, execution_date=20250221T101506, start_date=20250221T101509, end_date=20250221T101510
+[2025-02-21T10:15:10.327+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-02-21T10:15:10.349+0000] {taskinstance.py:3901} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-02-21T10:15:10.350+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

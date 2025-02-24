@@ -1,0 +1,167 @@
+[2025-02-21T10:15:08.404+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-02-21T10:15:08.414+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_to_DWH.extract manual__2025-02-21T10:15:06.546830+00:00 [queued]>
+[2025-02-21T10:15:08.418+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_to_DWH.extract manual__2025-02-21T10:15:06.546830+00:00 [queued]>
+[2025-02-21T10:15:08.418+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 2
+[2025-02-21T10:15:08.423+0000] {taskinstance.py:2890} INFO - Executing <Task(PythonOperator): extract> on 2025-02-21 10:15:06.546830+00:00
+[2025-02-21T10:15:08.433+0000] {logging_mixin.py:190} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=291) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-02-21T10:15:08.435+0000] {standard_task_runner.py:72} INFO - Started process 293 to run task
+[2025-02-21T10:15:08.433+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'etl_to_DWH', 'extract', 'manual__2025-02-21T10:15:06.546830+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/etl.py', '--cfg-path', '/tmp/tmpl6dv967u']
+[2025-02-21T10:15:08.436+0000] {standard_task_runner.py:105} INFO - Job 3: Subtask extract
+[2025-02-21T10:15:08.462+0000] {logging_mixin.py:190} WARNING - /home/***/.local/lib/python3.12/site-packages/***/settings.py:209 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2025-02-21T10:15:08.540+0000] {task_command.py:467} INFO - Running <TaskInstance: etl_to_DWH.extract manual__2025-02-21T10:15:06.546830+00:00 [running]> on host 327d2c65685a
+[2025-02-21T10:15:08.614+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_to_DWH' AIRFLOW_CTX_TASK_ID='extract' AIRFLOW_CTX_EXECUTION_DATE='2025-02-21T10:15:06.546830+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-21T10:15:06.546830+00:00'
+[2025-02-21T10:15:08.615+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-02-21T10:15:08.759+0000] {python.py:240} INFO - Done. Returned value was: (    account_id  customer_id  ...          date_opened      status
+0            1            1  ...  2020-05-01 09:00:00      active
+1            2            2  ...  2020-06-01 10:00:00      active
+2            3            1  ...  2020-06-21 09:00:00      active
+3            4            3  ...  2021-06-24 11:00:00  terminated
+4            5            4  ...  2020-06-29 13:00:00      active
+5            6            5  ...  2020-07-01 09:00:00      active
+6            7            6  ...  2020-07-14 09:00:00  terminated
+7            8            7  ...  2020-07-15 09:00:00      active
+8            9            8  ...  2020-07-15 11:00:00      active
+9           10            9  ...  2020-07-16 10:00:00      active
+10          11           10  ...  2020-07-24 11:00:00      active
+11          12           11  ...  2020-08-08 10:00:00      active
+12          13           12  ...  2020-08-15 11:00:00      active
+13          14           13  ...  2020-08-15 14:00:00      active
+14          15           14  ...  2020-09-25 08:00:00  terminated
+15          16           15  ...  2020-09-26 09:00:00      active
+16          17           15  ...  2020-10-19 09:00:00      active
+17          18           17  ...  2020-10-21 10:00:00      active
+18          19           18  ...  2020-11-11 09:00:00      active
+19          20           19  ...  2020-11-19 08:00:00      active
+20          21           20  ...  2020-11-29 08:00:00      active
+21          22            3  ...  2022-08-18 10:00:00      active
+22          23            6  ...  2022-01-10 12:00:00      active
+
+[23 rows x 6 columns],    branch_id   branch_name          branch_location
+0          1    KC Jakarta  Jl. Gatot Subroto No 13
+1          2      KC Bogor     Jl. Padjajaran No 43
+2          3      KC Depok  Jl. Raya Sawangan No 34
+3          4  KC Tangerang         Jl. Cisauk No 50
+4          5     KC Bekasi     Jl. Ahmad Yani No 23,     city_id          city_name  state_id
+0         1          Cilincing         1
+1         2      Kelapa Gading         1
+2         3      Tanjung Priok         1
+3         4               Koja         1
+4         5         Pademangan         1
+5         6        Penjaringan         1
+6         7           Cilandak         2
+7         8          Jagakarsa         2
+8         9   Mampang Prapatan         2
+9        10           Pancoran         2
+10       11              Tebet         2
+11       12          Setiabudi         2
+12       13             Gambir         3
+13       14        Sawah Besar         3
+14       15          Kemayoran         3
+15       16            Menteng         3
+16       17              Senen         3
+17       18        Tanah Abang         3
+18       19             Gambir         3
+19       20             Cakung         4
+20       21            Ciracas         4
+21       22        Duren Sawit         4
+22       23         Jatinegara         4
+23       24         Pasar Rebo         4
+24       25        Pulo Gadung         4
+25       26         Cengkareng         5
+26       27  Grogol Petamburan         5
+27       28        Kebon Jeruk         5
+28       29           Palmerah         5
+29       30          Kalideres         5
+30       31         Bojonggede         6
+31       32              Ciawi         6
+32       33           Cibinong         6
+33       34          Cileungsi         6
+34       35             Ciomas         6
+35       36        Tajurhalang         6
+36       37               Beji         7
+37       38           Cilodong         7
+38       39             Cinere         7
+39       40          Cimanggis         7
+40       41           Sawangan         7
+41       42          Sukmajaya         7
+42       43           Balaraja         8
+43       44             Cisauk         8
+44       45          Tigaraksa         8
+45       46              Legok         8
+46       47            Kosambi         8
+47       48            Babelan         9
+48       49           Cibitung         9
+49       50     Tambun Selatan         9
+50       51   Cikarang Selatan         9
+51       52           Sukatani         9,     customer_id    customer_name  ...  gender             email
+0             1    Shelly Juwita  ...  female  shelly@gmail.com
+1             2     Bobi Rinaldo  ...    male    Bobi@gmail.com
+2             3       Adam Malik  ...    male    Adam@gmail.com
+3             4   Susi Rahmawati  ...  female    Susi@gmail.com
+4             5   Dimas Prasetyo  ...    male   Dimas@gmail.com
+5             6     Aji Pangestu  ...    male     Aji@gmail.com
+6             7     Bunga Malika  ...  female   Bunga@gmail.com
+7             8       Ria Addini  ...  female     Ria@gmail.com
+8             9   Lisa Wulandari  ...  female    Lisa@gmail.com
+9            10       Rio Wijaya  ...    male     Rio@gmail.com
+10           11   Ahmad Riyansah  ...    male   Ahmad@gmail.com
+11           12     Mario Robert  ...    male   Mario@gmail.com
+12           13     Khansa Audya  ...  female  Khansa@gmail.com
+13           14  Cintya Gabriela  ...  female  Cintya@gmail.com
+14           15      Ani Nuraini  ...  female     Ani@gmail.com
+15           16    Agung Mulyono  ...    male   Agung@gmail.com
+16           17      Rian Wibowo  ...    male    Rian@gmail.com
+17           18      Lutfi Aulia  ...    male   Lutfi@gmail.com
+18           19   Malika Cantika  ...  female  Malika@gmail.com
+19           20   Ratna Sariasih  ...  female   Ratna@gmail.com
+
+[20 rows x 7 columns],    state_id       state_name
+0         1    Jakarta Utara
+1         2  Jakarta Selatan
+2         3    Jakarta Pusat
+3         4    Jakarta Timur
+4         5    Jakarta Barat
+5         6            Bogor
+6         7            Depok
+7         8        Tangerang
+8         9           Bekasi,    transaction_id  account_id  ... transaction_type  branch_id
+0               1           1  ...          Deposit          1
+1               2           2  ...          Deposit          1
+2               3           3  ...         Transfer          1
+3               4           3  ...       Withdrawal          1
+4               5           5  ...          Deposit          1
+5               6           6  ...       Withdrawal          1
+6               7           6  ...          Payment          1
+7               8           7  ...          Deposit          1
+8               9           8  ...       Withdrawal          2
+9              10           9  ...          Deposit          1
+
+[10 rows x 6 columns],     transaction_id  account_id  ... transaction_type  branch_id
+0               14          13  ...          Deposit          4
+1               15          14  ...         Transfer          3
+2               16          15  ...          Deposit          1
+3               17          16  ...       Withdrawal          5
+4               18          17  ...          Deposit          5
+5               19          18  ...          Payment          2
+6               20          19  ...          Deposit          2
+7               21          20  ...          Payment          4
+8               22          21  ...       Withdrawal          5
+9               23          22  ...       Withdrawal          1
+10              24          23  ...          Payment          1
+11              25          23  ...          Deposit          1
+
+[12 rows x 6 columns],    transaction_id  account_id  ... transaction_type  branch_id
+0               6           6  ...       Withdrawal          1
+1               7           6  ...          Payment          1
+2              11          10  ...         Transfer          1
+3              12          11  ...          Deposit          1
+4              13          12  ...       Withdrawal          5
+5              14          13  ...          Deposit          4
+6              15          14  ...         Transfer          3
+
+[7 rows x 6 columns])
+[2025-02-21T10:15:08.920+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-02-21T10:15:08.921+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=etl_to_DWH, task_id=extract, run_id=manual__2025-02-21T10:15:06.546830+00:00, execution_date=20250221T101506, start_date=20250221T101508, end_date=20250221T101508
+[2025-02-21T10:15:09.031+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-02-21T10:15:09.137+0000] {taskinstance.py:3901} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-02-21T10:15:09.138+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

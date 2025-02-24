@@ -58,8 +58,8 @@ BEGIN
     RETURN QUERY
     SELECT 
         transactiondate AS transaction_date,
-        COUNT(*)::INTEGER AS total_transactions,  -- Konversi ke INTEGER
-        SUM(amount)::INTEGER AS total_amount      -- Konversi ke INTEGER
+        COUNT(*)::INTEGER AS total_transactions,  
+        SUM(amount)::INTEGER AS total_amount      
     FROM facttransaction
     WHERE transactiondate BETWEEN start_date AND end_date
     GROUP BY transactiondate
